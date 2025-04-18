@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide Car Rentals</title>
+    <style>
+        /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2ecc71;
+    --primary-dark: #27ae60;
+    --secondary-color: #222;
+    --light-color: #f4f4f4;
+    --gray-color: #777;
+    --light-gray: #ddd;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: antiquewhite;
+    background-color: black;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+/* Header */
+header {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    padding: 10px;
+    font-weight: 500;
+    position: relative;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: var(--primary-color);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after, nav ul li a.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://img.freepik.com/free-photo/luxurious-car-parked-highway-with-illuminated-headlight-sunset_181624-60607.jpg?semt=ais_hybrid&w=740') no-repeat center center/cover;
+    height: 500px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#hero h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Search Section */
+#search {
+    background: rgb(30, 29, 29);;
+    padding: 40px 0;
+}
+
+.search-container {
+    background: black;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.search-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.form-group {
+    flex: 1 0 200px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.search-form .btn {
+    margin-top: 24px;
+}
+
+/* Cars Section */
+#cars {
+    padding: 60px 0;
+}
+
+#cars h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid var(--light-gray);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.cars-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.car-card {
+    background: rgb(30, 29, 29);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    color: rgb(230, 224, 224);
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
+}
+
+.car-img {
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.car-type {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.car-info {
+    padding: 20px;
+}
+
+.car-info h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.car-features {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-size: 15px;
+    color: var(--gray-color);
+}
+
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-color);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalopen 0.5s;
+}
+
+@keyframes modalopen {
+    from {opacity: 0; transform: translateY(-60px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close {
+    color: var(--gray-color);
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--secondary-color);
+}
+
+#selected-car-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.selected-car-img {
+    width: 120px;
+    height: 80px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+}
+
+.selected-car-details h3 {
+    margin-bottom: 5px;
+}
+
+.selected-car-price {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.total-price {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#total-price {
+    color: var(--primary-color);
+}
+
+/* About Section */
+#about {
+    background-color: var(--light-color);
+}
+
+#about h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#about p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 18px;
+}
+#about
+{
+    background-color: black;
+    color: white;
+}
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    
+}
+
+.feature {
+    flex: 1 0 300px;
+    max-width: 350px;
+    text-align: center;
+    padding: 30px;
+    background-color:rgb(30, 29, 29);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    margin-bottom: 15px;
+}
+
+/* Contact Section */
+#contact h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.contact
+{
+    background-color: #333;
+}
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    
+}
+
+.contact-form {
+    flex: 1 0 300px;
+}
+
+.contact-info {
+    flex: 1 0 300px;
+    padding: 30px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 8px;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-item h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-link {
+    color: white;
+    padding: 8px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    #hero {
+        height: 400px;
+    }
+    
+    #hero h2 {
+        font-size: 30px;
+    }
+    
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    #selected-car-info {
+        flex-direction: column;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><span class="highlight"> Car Rentals</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#cars">Our Cars</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Premium Cars at Affordable Prices</h2>
+            <p>Find your perfect ride for any occasion</p>
+            <button id="book-now" class="btn">Book Now</button>
+        </div>
+    </section>
+
+    <section id="search">
+        <div class="container">
+            <div class="search-container">
+                <h2>Find Your Perfect Car</h2>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="pickup-date">Pickup Date</label>
+                        <input type="date" id="pickup-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="return-date">Return Date</label>
+                        <input type="date" id="return-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="car-type">Car Type</label>
+                        <select id="car-type">
+                            <option value="all">All Cars</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="sports">Sports</option>
+                            <option value="electric">Electric</option>
+                        </select>
+                    </div>
+                    <button id="search-btn" class="btn">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cars">
+        <div class="container">
+            <h2>Our Fleet</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="sedan">Sedan</button>
+                <button class="filter-btn" data-filter="suv">SUV</button>
+                <button class="filter-btn" data-filter="luxury">Luxury</button>
+                <button class="filter-btn" data-filter="sports">Sports</button>
+                <button class="filter-btn" data-filter="electric">Electric</button>
+                <button class="filter-btn" data-filter="hatchback">Hatchback</button>
+            </div>
+            <div class="cars-container" id="cars-grid">
+                <!-- Cars will be dynamically inserted here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Reserve Your Car</h2>
+            <div id="selected-car-info"></div>
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="customer-name">Full Name</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Email</label>
+                    <input type="email" id="customer-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone</label>
+                    <input type="tel" id="customer-phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="modal-pickup-date">Pickup Date</label>
+                        <input type="date" id="modal-pickup-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-return-date">Return Date</label>
+                        <input type="date" id="modal-return-date" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="additional-info">Additional Requirements</label>
+                    <textarea id="additional-info" rows="3"></textarea>
+                </div>
+                <div class="total-price">
+                    <span>Total Price: </span>
+                    <span id="total-price">$0.00</span>
+                </div>
+                <button type="submit" class="btn">Complete Reservation</button>
+            </form>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <h2>About EcoRide Car Rentals</h2>
+            <p>EcoRide Car Rentals is committed to providing high-quality vehicles with exceptional service. Founded in 2010, we've grown to become a trusted name in the car rental industry with a focus on customer satisfaction and environmental responsibility.</p>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Premium Fleet</h3>
+                    <p>Our vehicles are regularly maintained and never older than 2 years.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Competitive rates with no hidden fees or charges.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Growing selection of electric and hybrid vehicles to reduce environmental impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h3>Address</h3>
+                        <p>123 Green Street, Cityville, State 12345</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Phone</h3>
+                        <p>(555) 123-4567</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Email</h3>
+                        <p>info@ecoriderentals.com</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Hours</h3>
+                        <p>Monday - Friday: 8am - 8pm<br>
+                        Saturday: 9am - 6pm<br>
+                        Sunday: 10am - 4pm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EcoRide Car Rentals. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Car data with prices in Indian Rupees
+    const cars = [
+        {
+            id: 1,
+            name: "Toyota Camry",
+            type: "sedan",
+            price: 3500,
+            seating: 5,
+            luggage: 3,
+            transmission: "Automatic",
+            fuel: "Petrol",
+            mileage: "12 kmpl",
+            image: "https://www.hdwallpapers.in/download/toyota_camry_hybrid_ws_leather_package_2021_4k_5k_hd_cars-HD.jpg"
+        },
+        {
+            id: 2,
+            name: "Honda CR-V",
+            type: "suv",
+            price: 4500,
+            seating: 5,
+            luggage: 4,
+            transmission: "Automatic",
+            fuel: "Diesel",
+            mileage: "14 kmpl",
+            image: "https://images8.alphacoders.com/549/549210.jpg"
+        },
+        {
+            id: 3,
+            name: "Mercedes S-Class",
+            type: "luxury",
+            price: 12000,
+            seating: 5,
+            luggage: 3,
+            transmission: "Automatic",
+            fuel: "Petrol",
+            mileage: "9 kmpl",
+            image: "https://www.hdcarwallpapers.com/walls/mercedes_benz_s_klasse_lang_amg_line_2020_4k-HD.jpg"
+        },
+        {
+            id: 4,
+            name: "BMW M4",
+            type: "sports",
+            price: 15000,
+            seating: 4,
+            luggage: 2,
+            transmission: "Manual",
+            fuel: "Petrol",
+            mileage: "8 kmpl",
+            image: "https://i.ytimg.com/vi/x9fB-2OOHFo/maxresdefault.jpg"
+        },
+        {
+            id: 5,
+            name: "Tata Nexon EV",
+            type: "electric",
+            price: 5000,
+            seating: 5,
+            luggage: 3,
+            transmission: "Automatic",
+            fuel: "Electric",
+            mileage: "300 km/charge",
+            image: "https://s7ap1.scene7.com/is/image/tatapassenger/City-33?$B-1228-696-S$&fit=crop&fmt=webp"
+        },
+        {
+            id: 6,
+            name: "Hyundai Creta",
+            type: "suv",
+            price: 4000,
+            seating: 5,
+            luggage: 4,
+            transmission: "Automatic",
+            fuel: "Diesel",
+            mileage: "16 kmpl",
+            image: "https://e1.pxfuel.com/desktop-wallpaper/210/519/desktop-wallpaper-2021-hyundai-creta-hyundai-creta-2021.jpg"
+        },
+        {
+            id: 7,
+            name: "Maruti Suzuki Swift",
+            type: "hatchback",
+            price: 2000,
+            seating: 5,
+            luggage: 2,
+            transmission: "Manual",
+            fuel: "Petrol",
+            mileage: "22 kmpl",
+            image: "https://images5.alphacoders.com/136/1365537.jpeg"
+        },
+        {
+            id: 8,
+            name: "Kia Seltos",
+            type: "suv",
+            price: 4200,
+            seating: 5,
+            luggage: 4,
+            transmission: "Automatic",
+            fuel: "Diesel",
+            mileage: "18 kmpl",
+            image: "https://www.hdcarwallpapers.com/walls/kia_seltos_2023_4k-HD.jpg"
+        },
+        {
+    id: 9,
+    name: "Mahindra Thar",
+    type: "suv",
+    price: 5500,
+    seating: 4,
+    luggage: 2,
+    transmission: "Manual",
+    fuel: "Petrol",
+    mileage: "15 kmpl",
+    image: "https://w0.peakpx.com/wallpaper/684/51/HD-wallpaper-black-thar.jpg"
+},
+{
+    id: 10,
+    name: "Toyota Fortuner",
+    type: "suv",
+    price: 7000,
+    seating: 7,
+    luggage: 5,
+    transmission: "Automatic",
+    fuel: "Diesel",
+    mileage: "12 kmpl",
+    image: "https://wallpapercave.com/wp/wp5345258.jpg"
+},
+{
+    id: 11,
+    name: "Hyundai Verna",
+    type: "sedan",
+    price: 3800,
+    seating: 5,
+    luggage: 3,
+    transmission: "Automatic",
+    fuel: "Petrol",
+    mileage: "17 kmpl",
+    image: "https://cdn.wallpapersafari.com/88/26/Wyt3su.jpg"
+},
+{
+    id: 12,
+    name: "Renault Kwid",
+    type: "hatchback",
+    price: 1800,
+    seating: 5,
+    luggage: 2,
+    transmission: "Manual",
+    fuel: "Petrol",
+    mileage: "22 kmpl",
+    image: "https://w0.peakpx.com/wallpaper/94/401/HD-wallpaper-renault-kwid-ultra-crossovers-2021-cars-za-spec-2021-renault-kwid-french-cars-renault.jpg"
+},
+{
+    id: 13,
+    name: "Tata Safari",
+    type: "suv",
+    price: 5200,
+    seating: 7,
+    luggage: 4,
+    transmission: "Automatic",
+    fuel: "Diesel",
+    mileage: "14 kmpl",
+    image: "https://wallpapercave.com/wp/wp4537772.jpg"
+},
+{
+    id: 14,
+    name: "MG Hector",
+    type: "suv",
+    price: 4800,
+    seating: 5,
+    luggage: 4,
+    transmission: "Automatic",
+    fuel: "Petrol",
+    mileage: "15 kmpl",
+    image: "https://assets.gqindia.com/photos/5cdc04a7306c1c61f76e2b86/16:9/w_2560%2Cc_limit/top-image103.jpg"
+},
+{
+    id: 15,
+    name: "Maruti Baleno",
+    type: "hatchback",
+    price: 2100,
+    seating: 5,
+    luggage: 2,
+    transmission: "Manual",
+    fuel: "Petrol",
+    mileage: "21 kmpl",
+    image: "https://wallpapercat.com/w/full/f/8/f/1745577-2880x1800-desktop-hd-suzuki-baleno-background-image.jpg"
+}
+
+    ];
+
+    // DOM elements
+    const carsGrid = document.getElementById('cars-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const searchButton = document.getElementById('search-btn');
+    const bookNowButton = document.getElementById('book-now');
+    const modal = document.getElementById('booking-modal');
+    const closeButton = document.querySelector('.close');
+    const totalPriceElement = document.getElementById('total-price');
+    const bookingForm = document.getElementById('booking-form');
+    const modalPickupDate = document.getElementById('modal-pickup-date');
+    const modalReturnDate = document.getElementById('modal-return-date');
+    const carTypeFilter = document.getElementById('car-type');
+    const pickupDateField = document.getElementById('pickup-date');
+    const returnDateField = document.getElementById('return-date');
+    
+    let selectedCar = null;
+    let currentFilter = 'all';
+
+    // Set minimum dates for date inputs
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const formatDate = (date) => {
+        return date.toISOString().split('T')[0];
+    };
+    
+    pickupDateField.min = formatDate(today);
+    returnDateField.min = formatDate(tomorrow);
+    modalPickupDate.min = formatDate(today);
+    modalReturnDate.min = formatDate(tomorrow);
+
+    // Initialize displaying all cars
+    displayCars(currentFilter);
+
+    // Event listeners for filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            currentFilter = button.getAttribute('data-filter');
+            displayCars(currentFilter);
+        });
+    });
+
+    // Search functionality
+    searchButton.addEventListener('click', () => {
+        const carType = carTypeFilter.value;
+        currentFilter = carType;
+        
+        filterButtons.forEach(btn => {
+            if (btn.getAttribute('data-filter') === carType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        displayCars(carType);
+        document.getElementById('cars').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Display cars based on filter
+    function displayCars(filter) {
+        carsGrid.innerHTML = '';
+        
+        const filteredCars = filter === 'all' ? 
+            cars : 
+            cars.filter(car => car.type === filter);
+        
+        filteredCars.forEach(car => {
+            const carCard = document.createElement('div');
+            carCard.className = 'car-card';
+            carCard.innerHTML = `
+                <div class="car-img" style="background-image: url('${car.image}')">
+                    <div class="car-type">${car.type.charAt(0).toUpperCase() + car.type.slice(1)}</div>
+                </div>
+                <div class="car-info">
+                    <h3>${car.name}</h3>
+                    <div class="car-features">
+                        <span><i class="fas fa-user"></i> ${car.seating} Seats</span>
+                        <span><i class="fas fa-suitcase"></i> ${car.luggage} Bags</span>
+                        <span><i class="fas fa-tachometer-alt"></i> ${car.mileage}</span>
+                    </div>
+                    <div class="car-features">
+                        <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
+                        <span><i class="fas fa-cog"></i> ${car.transmission}</span>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">₹${car.price.toLocaleString('en-IN')}<span>/day</span></div>
+                        <button class="btn book-car-btn" data-id="${car.id}">Book Now</button>
+                    </div>
+                </div>
+            `;
+            carsGrid.appendChild(carCard);
+        });
+
+        document.querySelectorAll('.book-car-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const carId = parseInt(e.target.getAttribute('data-id'));
+                selectedCar = cars.find(car => car.id === carId);
+                openBookingModal();
+            });
+        });
+    }
+
+    // Book Now button in hero section
+    bookNowButton.addEventListener('click', () => {
+        document.getElementById('cars').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Modal functionality
+    function openBookingModal() {
+        if (selectedCar) {
+            const selectedCarInfo = document.getElementById('selected-car-info');
+            selectedCarInfo.innerHTML = `
+                <div class="selected-car-img" style="background-image: url('${selectedCar.image}')"></div>
+                <div class="selected-car-details">
+                    <h3>${selectedCar.name}</h3>
+                    <p>${selectedCar.type.charAt(0).toUpperCase() + selectedCar.type.slice(1)} | ${selectedCar.seating} Seats | ${selectedCar.transmission}</p>
+                    <p class="selected-car-price">₹${selectedCar.price.toLocaleString('en-IN')}/day</p>
+                </div>
+            `;
+            
+            if (pickupDateField.value) {
+                modalPickupDate.value = pickupDateField.value;
+            }
+            if (returnDateField.value) {
+                modalReturnDate.value = returnDateField.value;
+            }
+            
+            calculateTotalPrice();
+            modal.style.display = 'block';
+        }
+    }
+
+    // Close modal
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Calculate total price
+    function calculateTotalPrice() {
+        if (selectedCar && modalPickupDate.value && modalReturnDate.value) {
+            const pickup = new Date(modalPickupDate.value);
+            const returnDate = new Date(modalReturnDate.value);
+            
+            const timeDiff = returnDate - pickup;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            
+            if (daysDiff > 0) {
+                const totalPrice = selectedCar.price * daysDiff;
+                totalPriceElement.textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+                return;
+            }
+        }
+        
+        totalPriceElement.textContent = `₹0`;
+    }
+
+    modalPickupDate.addEventListener('change', calculateTotalPrice);
+    modalReturnDate.addEventListener('change', calculateTotalPrice);
+
+    // Handle booking form submission
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const pickup = new Date(modalPickupDate.value);
+        const returnDate = new Date(modalReturnDate.value);
+        const timeDiff = returnDate - pickup;
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        
+        if (daysDiff <= 0) {
+            alert('Return date must be after pickup date');
+            return;
+        }
+        
+        const formData = {
+            car: selectedCar,
+            customerName: document.getElementById('customer-name').value,
+            customerEmail: document.getElementById('customer-email').value,
+            customerPhone: document.getElementById('customer-phone').value,
+            pickupDate: modalPickupDate.value,
+            returnDate: modalReturnDate.value,
+            additionalInfo: document.getElementById('additional-info').value,
+            totalPrice: parseFloat(totalPriceElement.textContent.replace('₹', '').replace(/,/g, '')),
+            days: daysDiff
+        };
+        
+        console.log('Booking submitted:', formData);
+        alert(`Booking confirmed for ${selectedCar.name}! Check your email for details.`);
+        modal.style.display = 'none';
+        bookingForm.reset();
+    });
+
+    // Sync dates between search form and modal
+    pickupDateField.addEventListener('change', () => {
+        modalPickupDate.value = pickupDateField.value;
+    });
+    
+    returnDateField.addEventListener('change', () => {
+        modalReturnDate.value = returnDateField.value;
+    });
+
+    // Set default dates
+    pickupDateField.value = formatDate(today);
+    const nextDay = new Date(today);
+    nextDay.setDate(nextDay.getDate() + 3);
+    returnDateField.value = formatDate(nextDay);
+
+    // Initialize car type filter
+    const populateCarTypeFilter = () => {
+        const carTypes = ['all', ...new Set(cars.map(car => car.type))];
+        carTypeFilter.innerHTML = '';
+        
+        carTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type === 'all' ? 'All Cars' : type.charAt(0).toUpperCase() + type.slice(1);
+            carTypeFilter.appendChild(option);
+        });
+    };
+    
+    populateCarTypeFilter();
+});
+    </script>
+</body>
+</html>
